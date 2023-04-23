@@ -87,19 +87,21 @@ export const RecommendationMenu = () => {
                     <Input
                       type="text"
                       id={`favorite-${index}`}
-                      className="pr-9"
+                      className={`${favorites.length > 1 && "pr-9"}`}
                       placeholder="Type your favorite movie..."
                       onChange={(e) => {
                         changeFavorite(e, index);
                       }}
                     />
-                    <button
-                      type="button"
-                      className="group -ml-7"
-                      onClick={() => removeFavorite(index)}
-                    >
-                      <XCircle className="h-5 w-5 text-accent group-hover:text-primary" />
-                    </button>
+                    {favorites.length > 1 ? (
+                      <button
+                        type="button"
+                        className="group -ml-7"
+                        onClick={() => removeFavorite(index)}
+                      >
+                        <XCircle className="h-5 w-5 text-accent group-hover:text-primary" />
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               ))}
