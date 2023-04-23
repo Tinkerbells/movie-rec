@@ -13,8 +13,8 @@ export const Navbar = () => {
       <div className="flex items-center justify-between gap-8">
         <div>
           {!session ? (
-            // Handle unauthenticated state, e.g. render a SignIn component
-            <SignInButton>Sign in</SignInButton>
+            // Handle unauthenticated state, e.g. render a SignIn/SignOut component
+            <SignInButton />
           ) : (
             <SignOutButton />
           )}
