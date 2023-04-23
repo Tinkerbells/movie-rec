@@ -7,7 +7,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="relative flex h-screen items-center justify-center overflow-x-hidden">
+        {children}
+      </main>
       <Toaster />
     </>
   );
