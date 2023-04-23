@@ -14,7 +14,7 @@ export const Navbar = () => {
         <div>
           {!session ? (
             // Handle unauthenticated state, e.g. render a SignIn component
-            <SignInButton />
+            <SignInButton>Sign in</SignInButton>
           ) : (
             <SignOutButton />
           )}
