@@ -29,7 +29,6 @@ export const SimilarityMenu = () => {
       setFavorites(favorites.filter((_, i) => i !== index));
     }
   };
-  console.log(favorites);
   return (
     <TabsContent value="similar">
       <Card>
