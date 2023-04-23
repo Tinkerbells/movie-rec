@@ -17,16 +17,22 @@ import { Input } from "./ui/input";
 import { Plus, XCircle } from "lucide-react";
 import { useState } from "react";
 export const RecommendationMenu = () => {
+  const favoriteNumbers = ["First", "Second", "Third", "Fourth", "Fifth"];
   const [favorites, setFavorites] = useState<string[]>([""]);
-  const changeFavorites = (
+  const changeFavorite = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const temp = favorites;
     temp[index] = event.target.value;
     setFavorites(temp);
-    console.log(temp);
   };
+  const removeFavorite = (index: number) => {
+    if (favorites.length > 1) {
+      setFavorites(favorites.filter((_, i) => i !== index));
+    }
+  };
+  console.log(favorites);
   return (
     <Tabs defaultValue="query" className="w-[500px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -74,7 +80,9 @@ export const RecommendationMenu = () => {
                   className="grid w-full max-w-xs items-center gap-1.5"
                   key={index}
                 >
-                  <Label htmlFor={`favorite-${index}`}>First favorite</Label>
+                  <Label htmlFor={`favorite-${index}`}>
+                    {favoriteNumbers[index]} favorite
+                  </Label>
                   <div className="flex">
                     <Input
                       type="text"
@@ -82,22 +90,21 @@ export const RecommendationMenu = () => {
                       className="pr-9"
                       placeholder="Type your favorite movie..."
                       onChange={(e) => {
-                        changeFavorites(e, index);
+                        changeFavorite(e, index);
                       }}
                     />
                     <button
                       type="button"
                       className="group -ml-7"
-                      onClick={() =>
-                        setFavorites(favorites.filter((_, i) => i !== index))
-                      }
+                      onClick={() => removeFavorite(index)}
                     >
                       <XCircle className="h-5 w-5 text-accent group-hover:text-primary" />
                     </button>
                   </div>
                 </div>
               ))}
-              {favorites.length <= 5 ? (
+              {/* Set max count of favorites movies to 5 */}
+              {favorites.length <= 4 ? (
                 <Button
                   variant="outline"
                   className="w-10 rounded-full p-0"
