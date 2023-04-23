@@ -4,7 +4,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { buttonVariants } from "@/components/ui/button";
 import { genres } from "@/consts";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { Label } from "@radix-ui/react-dropdown-menu";
+import { Label } from "./ui/label";
 
 export const GenreMultiSelect = () => {
   function MultipleSelect() {
@@ -84,7 +84,10 @@ export const GenreMultiSelect = () => {
                       removeSelectedItem(selectedItemForRender);
                     }}
                   >
-                    <X className="max-h-4 group-hover:text-primary-foreground" />
+                    <X
+                      className="max-h-4 font-bold group-hover:text-primary-foreground"
+                      strokeWidth={2}
+                    />
                   </span>
                 </span>
               );
@@ -108,7 +111,7 @@ export const GenreMultiSelect = () => {
           </div>
         </div>
         <ScrollArea
-          className={`h-72 w-full rounded-md border ${
+          className={`mt-1 h-72 w-full rounded-md border ${
             !(isOpen && items.length) && "hidden"
           }`}
           {...getMenuProps()}
