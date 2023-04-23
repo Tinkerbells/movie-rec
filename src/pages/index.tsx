@@ -1,29 +1,17 @@
+import { Button } from "@/components/ui/button";
 import { type NextPage } from "next";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Navbar } from "@/components";
-
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { RecommendationMenu, SignInButton } from "@/components";
 const Home: NextPage = () => {
+  const { data: session } = useSession();
   return (
     <div className="relative flex h-screen items-center justify-center overflow-x-hidden">
-      <DropdownMenu>
-        <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {!session ? (
+        <SignInButton>Get started</SignInButton>
+      ) : (
+        <RecommendationMenu />
+      )}
     </div>
   );
 };
