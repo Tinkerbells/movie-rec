@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/scroll-area";
 import { buttonVariants } from "@/components/ui/button";
 import { genres } from "@/consts";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 export const GenreMultiSelect = () => {
   function MultipleSelect() {
@@ -59,9 +61,7 @@ export const GenreMultiSelect = () => {
     return (
       <div className="w-full">
         <div className="flex flex-col gap-2">
-          <label className="w-fit" {...getLabelProps()}>
-            Pick your favorite genres:
-          </label>
+          <Label {...getLabelProps()}>Pick your favorite genres:</Label>
           <div className="inline-flex flex-wrap items-center gap-2 rounded-lg border p-1.5 shadow-sm">
             {selectedItems.map(function renderSelectedItem(
               selectedItemForRender,
@@ -69,7 +69,7 @@ export const GenreMultiSelect = () => {
             ) {
               return (
                 <span
-                  className="rounded-lg bg-accent px-1"
+                  className="flex rounded-lg bg-accent px-2 py-0.5 text-sm font-medium"
                   key={`selected-item-${index}`}
                   {...getSelectedItemProps({
                     selectedItem: selectedItemForRender,
@@ -78,13 +78,13 @@ export const GenreMultiSelect = () => {
                 >
                   {selectedItemForRender?.label}
                   <span
-                    className="cursor-pointer px-1"
+                    className="group grid cursor-pointer place-items-center pl-1"
                     onClick={(e) => {
                       e.stopPropagation();
                       removeSelectedItem(selectedItemForRender);
                     }}
                   >
-                    &#10005;
+                    <X className="max-h-4 group-hover:text-primary-foreground" />
                   </span>
                 </span>
               );
@@ -98,7 +98,12 @@ export const GenreMultiSelect = () => {
                 getDropdownProps({ preventKeyAction: isOpen })
               )}
             >
-              Pick genre &#8595;
+              Pick genre
+              {isOpen ? (
+                <ChevronUp className="max-h-5" />
+              ) : (
+                <ChevronDown className="max-h-5" />
+              )}{" "}
             </button>
           </div>
         </div>
