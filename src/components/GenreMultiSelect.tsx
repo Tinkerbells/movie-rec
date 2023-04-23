@@ -5,8 +5,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { genres } from "@/consts";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import { Label } from "./ui/label";
-
+import { useMemo } from "react";
 export const GenreMultiSelect = () => {
+  console.log("rerender");
   function MultipleSelect() {
     const {
       getSelectedItemProps,
@@ -14,8 +15,13 @@ export const GenreMultiSelect = () => {
       addSelectedItem,
       removeSelectedItem,
       selectedItems,
-    } = useMultipleSelection({ initialSelectedItems: [genres[0], genres[1]] });
-    const items = genres.filter((genre) => selectedItems.indexOf(genre) < 0);
+    } = useMultipleSelection({ initialSelectedItems: [genres[0]] });
+
+    const items = useMemo(
+      () => genres.filter((genre) => selectedItems.indexOf(genre) < 0),
+      [selectedItems]
+    );
+
     const {
       isOpen,
       selectedItem,
@@ -61,7 +67,7 @@ export const GenreMultiSelect = () => {
     return (
       <div className="w-full">
         <div className="flex flex-col gap-2">
-          <Label {...getLabelProps()}>Pick your favorite genres:</Label>
+          <label {...getLabelProps()}>Pick your favorite genres:</label>
           <div className="inline-flex flex-wrap items-center gap-2 rounded-lg border p-1.5 shadow-sm">
             {selectedItems.map(function renderSelectedItem(
               selectedItemForRender,
