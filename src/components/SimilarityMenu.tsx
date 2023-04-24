@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -16,21 +16,19 @@ import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
 import { exampleRouter } from "@/server/api/routers/example";
 
-interface GenreQueryFormValues {
+interface SimilarityMenuFormValues {
   favorites: string[];
 }
 export const SimilarityMenu = () => {
   const { values, errors, setFieldValue, handleSumbit } =
-    useForm<GenreQueryFormValues>({
+    useForm<SimilarityMenuFormValues>({
       defaultValues: { favorites: [""] },
       onSubmit: (values) => {
         console.log(values);
       },
       validate: (values) => {
-        const isEmpty = values.favorites
-          ? values.favorites.find((el) => el.length === 0)
-          : true;
-        if (!isEmpty) {
+        const isEmpty = values.favorites.some((el) => el.length === 0);
+        if (isEmpty) {
           return { favorites: "No favorite movies are provided!" };
         }
         return;
@@ -54,6 +52,7 @@ export const SimilarityMenu = () => {
       );
     }
   };
+
   return (
     <TabsContent value="similar">
       <form onSubmit={handleSumbit}>
