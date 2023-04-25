@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { MovieCard } from "./MovieCard";
+import { TabsContent } from "./ui/tabs";
 export type RecommendationType = {
   title: string;
   description: string;
@@ -11,8 +12,8 @@ export const Recommendations: FC<RecommendationsProps> = ({
   recommendations,
 }) => {
   return (
-    <div className="flex flex-col gap-2.5">
-      {recommendations.map((movie, index) => (
+    <div className="flex flex-col gap-2.5 rounded-lg border p-4">
+      {recommendations.map((movie) => (
         <MovieCard key={movie.title} movie={movie} />
       ))}
     </div>
