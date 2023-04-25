@@ -20,7 +20,6 @@ import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
 import { api } from "@/utils/api";
 import { Recommendations } from "./Recommendations";
-import { error } from "console";
 import { ToastAction } from "./ui/toast";
 
 interface GenreQueryFormValues {
@@ -29,8 +28,8 @@ interface GenreQueryFormValues {
 }
 
 export const GenreQueryMenu = () => {
-  const { values, errors, setFieldValue, handleSumbit } =
-    useForm<GenreQueryFormValues>({
+  const { values, setFieldValue, handleSumbit } = useForm<GenreQueryFormValues>(
+    {
       defaultValues: { query: "", selectedGenres: [] },
       onSubmit: (values) => {
         if (!!values) refetch();
@@ -47,7 +46,8 @@ export const GenreQueryMenu = () => {
         }
         return;
       },
-    });
+    }
+  );
 
   const { data, isFetching, error, refetch } =
     api.recommendation.genre.useQuery(
@@ -97,7 +97,7 @@ export const GenreQueryMenu = () => {
     selectedItem: null,
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
     items,
-    stateReducer: (state, actionAndChanges) => {
+    stateReducer: (_, actionAndChanges) => {
       const { changes, type } = actionAndChanges;
       switch (type) {
         case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:

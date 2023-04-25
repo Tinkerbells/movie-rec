@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { MovieCard } from "./MovieCard";
-import { TabsContent } from "./ui/tabs";
 export type RecommendationType = {
   title: string;
   description: string;

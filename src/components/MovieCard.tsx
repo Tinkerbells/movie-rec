@@ -2,13 +2,11 @@ import { FC } from "react";
 import { RecommendationType } from "./Recommendations";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Image as ImageIcon, Loader2 } from "lucide-react";
-import Image from "next/image";
 import { api } from "@/utils/api";
 import { BlurImage } from "./BlurImage";
 import { TmdbImageLoader } from "./TmdbImageLoader";
@@ -17,7 +15,7 @@ interface MovieCardProps {
   movie: RecommendationType;
 }
 export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
-  const { data, error, isLoading } = api.tmdb.search.useQuery({
+  const { data, isLoading } = api.tmdb.search.useQuery({
     query: movie.title,
   });
   return (
