@@ -7,7 +7,7 @@ import { generateGenrePrompt, generateSimilarPrompt } from "@/helpers";
 export const recommendationRouter = createTRPCRouter({
   genre: protectedProcedure
     .input(z.object({ genres: z.string().array(), query: z.string() }))
-    .mutation(async ({ input }) => {
+    .query(async ({ input }) => {
       const content = generateGenrePrompt(input.genres, input.query);
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
@@ -17,7 +17,7 @@ export const recommendationRouter = createTRPCRouter({
     }),
   similar: protectedProcedure
     .input(z.object({ favorites: z.string().array() }))
-    .mutation(async ({ input }) => {
+    .query(async ({ input }) => {
       const content = generateSimilarPrompt(input.favorites);
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
