@@ -27,13 +27,11 @@ interface GenreQueryFormValues {
 }
 
 export const GenreQueryMenu = () => {
-  const { data, isLoading, mutate } = api.recommendation.genre.useMutation();
   const { values, errors, setFieldValue, handleSumbit } =
     useForm<GenreQueryFormValues>({
       defaultValues: { query: "", selectedGenres: [] },
       onSubmit: (values) => {
-        if (!!values)
-          void mutate({ genres: values.selectedGenres, query: values.query });
+        if (!!values) refetch();
       },
       validate: (values) => {
         if (values.selectedGenres.length === 0) {
@@ -48,6 +46,12 @@ export const GenreQueryMenu = () => {
         return;
       },
     });
+
+  const { data, isFetching, refetch } = api.recommendation.genre.useQuery(
+    { genres: values.selectedGenres, query: values.query },
+    { enabled: false }
+  );
+
   const {
     getSelectedItemProps,
     getDropdownProps,
@@ -107,7 +111,7 @@ export const GenreQueryMenu = () => {
     },
   });
   return (
-    <TabsContent value="query">
+    <TabsContent value="genres">
       {data ? (
         <Recommendations recommendations={data} />
       ) : (
@@ -213,7 +217,7 @@ export const GenreQueryMenu = () => {
                 variant={"outline"}
                 className="w-full"
                 type="submit"
-                isLoading={isLoading}
+                isLoading={isFetching}
               >
                 Get recommendation
               </Button>
