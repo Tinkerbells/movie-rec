@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const Home: NextPage = () => {
   return (
     <div className="relative flex h-screen items-center justify-center overflow-x-hidden">
-      <div className="flex max-w-5xl flex-col items-center gap-4">
+      <div className="flex max-w-5xl flex-col items-center gap-8">
         <div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Find movie recommendations using AI
