@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,18 +12,18 @@ import { Input } from "./ui/input";
 import { Plus, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useForm } from "@/hooks";
-import { toast } from "./ui/use-toast";
-import { exampleRouter } from "@/server/api/routers/example";
+import { api } from "@/utils/api";
 
 interface SimilarityMenuFormValues {
   favorites: string[];
 }
 export const SimilarityMenu = () => {
+  const { data, isLoading, mutate } = api.recommendation.similar.useMutation();
   const { values, errors, setFieldValue, handleSumbit } =
     useForm<SimilarityMenuFormValues>({
       defaultValues: { favorites: [""] },
       onSubmit: (values) => {
-        console.log(values);
+        if (!!values) void mutate({ favorites: values.favorites });
       },
       validate: (values) => {
         const isEmpty = values.favorites.some((el) => el.length === 0);
@@ -60,7 +59,7 @@ export const SimilarityMenu = () => {
           <CardHeader>
             <CardTitle>Similarity recommendations</CardTitle>
             <CardDescription>
-              Get a recommendations by typing your favorite movies
+              Get a recommendations by typing your favorite movie titles
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -117,7 +116,12 @@ export const SimilarityMenu = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant={"outline"} className="w-full" type="submit">
+            <Button
+              variant={"outline"}
+              className="w-full"
+              type="submit"
+              isLoading={isLoading}
+            >
               Get recommendation
             </Button>
           </CardFooter>
