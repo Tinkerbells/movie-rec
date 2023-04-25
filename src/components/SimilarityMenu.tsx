@@ -14,6 +14,8 @@ import { Button } from "./ui/button";
 import { useForm } from "@/hooks";
 import { api } from "@/utils/api";
 import { Recommendations } from "./Recommendations";
+import { toast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 
 interface SimilarityMenuFormValues {
   favorites: string[];
@@ -34,10 +36,24 @@ export const SimilarityMenu = () => {
       },
     });
 
-  const { data, isFetching, refetch } = api.recommendation.similar.useQuery(
-    { favorites: values.favorites },
-    { enabled: false }
-  );
+  const { data, isFetching, error, refetch } =
+    api.recommendation.similar.useQuery(
+      { favorites: values.favorites },
+      { enabled: false }
+    );
+
+  if (error) {
+    toast({
+      variant: "destructive",
+      title: "Something went wrong!",
+      description: error.message,
+      action: (
+        <ToastAction altText="Try again" onClick={handleSumbit}>
+          Try again
+        </ToastAction>
+      ),
+    });
+  }
   const favoriteNumbers = ["First", "Second", "Third", "Fourth", "Fifth"];
   const changeFavorite = (
     event: React.ChangeEvent<HTMLInputElement>,

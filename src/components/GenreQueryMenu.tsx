@@ -20,6 +20,8 @@ import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
 import { api } from "@/utils/api";
 import { Recommendations } from "./Recommendations";
+import { error } from "console";
+import { ToastAction } from "./ui/toast";
 
 interface GenreQueryFormValues {
   query: string;
@@ -47,10 +49,24 @@ export const GenreQueryMenu = () => {
       },
     });
 
-  const { data, isFetching, refetch } = api.recommendation.genre.useQuery(
-    { genres: values.selectedGenres, query: values.query },
-    { enabled: false }
-  );
+  const { data, isFetching, error, refetch } =
+    api.recommendation.genre.useQuery(
+      { genres: values.selectedGenres, query: values.query },
+      { enabled: false }
+    );
+
+  if (error) {
+    toast({
+      variant: "destructive",
+      title: "Something went wrong!",
+      description: error.message,
+      action: (
+        <ToastAction altText="Try again" onClick={handleSumbit}>
+          Try again
+        </ToastAction>
+      ),
+    });
+  }
 
   const {
     getSelectedItemProps,
