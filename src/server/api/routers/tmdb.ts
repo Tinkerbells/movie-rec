@@ -7,6 +7,11 @@ export const tmdbRouter = createTRPCRouter({
   search: protectedProcedure
     .input(z.object({ query: z.string() }))
     .query(async ({ input }) => {
-      return getMovie(input.query);
+      const data = await getMovie(input.query);
+      return {
+        posterPath: data.results[0]?.poster_path,
+        releaseDate: data.results[0]?.release_date,
+        tmdbId: data.results[0]?.id,
+      };
     }),
 });
