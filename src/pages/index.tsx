@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { type NextPage } from "next";
-import { signIn, useSession } from "next-auth/react";
-import { RecommendationMenu } from "@/components";
-import { useEffect } from "react";
+import { signIn } from "next-auth/react";
 
 const Home: NextPage = () => {
   return (
