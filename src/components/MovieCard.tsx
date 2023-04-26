@@ -22,7 +22,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
     <Card key={movie.title} className="flex w-full max-w-xl items-center">
       {isLoading ? (
         <div className="h-32 p-2">
-          <div className="flex h-full w-20 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+          <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
           </div>
         </div>
@@ -33,7 +33,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
               className="flex cursor-pointer items-center p-2"
               href={`https://www.themoviedb.org/movie/${data.tmdbId}`}
             >
-              <figure className="h-full w-20 items-center">
+              <figure className="w-24">
                 <BlurImage
                   src={data.posterPath}
                   alt={movie.title}
@@ -45,7 +45,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
             </a>
           ) : (
             <div className="h-32 p-2">
-              <div className="flex h-full w-20 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+              <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                 <ImageIcon />
               </div>
             </div>
@@ -56,7 +56,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         <CardTitle>
           {movie.title}
           <p className="mt-1 text-sm font-normal text-muted-foreground">
-            {formatDate(data?.releaseDate!)}
+            {data?.releaseDate && formatDate(data?.releaseDate!)}
           </p>
         </CardTitle>
         <CardDescription>{movie.description}</CardDescription>
