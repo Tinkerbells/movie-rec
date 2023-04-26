@@ -10,7 +10,7 @@ import { Image as ImageIcon, Loader2 } from "lucide-react";
 import { api } from "@/utils/api";
 import { BlurImage } from "./BlurImage";
 import { TmdbImageLoader } from "./TmdbImageLoader";
-import { formatDate } from "@/helpers";
+import { formatDate, formatDescription } from "@/helpers";
 interface MovieCardProps {
   movie: RecommendationType;
 }
@@ -59,7 +59,9 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
             {data?.releaseDate && formatDate(data?.releaseDate!)}
           </p>
         </CardTitle>
-        <CardDescription>{movie.description}</CardDescription>
+        <CardDescription>
+          {formatDescription(movie.description)}
+        </CardDescription>
       </CardHeader>
     </Card>
   );
