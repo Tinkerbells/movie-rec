@@ -11,7 +11,7 @@ export default withAuth(
     const isAuth = !!token;
     const isAuthPage = pathname.startsWith("/");
 
-    const sensitiveRoutes = ["/dashboard"];
+    const sensitiveRoutes = ["/recommendations"];
 
     if (!isAuth) {
       if (!pathname.startsWith("/"))
@@ -27,8 +27,8 @@ export default withAuth(
 
     if (isAuthPage) {
       if (isAuth) {
-        if (!pathname.startsWith("/dashboard"))
-          return NextResponse.redirect(new URL("/dashboard", req.url));
+        if (!pathname.startsWith("/recommendations"))
+          return NextResponse.redirect(new URL("/recommendations", req.url));
       }
       return null;
     }
@@ -43,5 +43,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/", "/dashboard/"],
+  matcher: ["/", "/recommendations"],
 };
