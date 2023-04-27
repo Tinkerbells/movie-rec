@@ -73,6 +73,7 @@
 @layer base {
   * {
     @apply border-border;
+    @apply scrollbar scrollbar-thin scrollbar-track-card scrollbar-thumb-accent scrollbar-thumb-rounded-lg;
   }
   body {
     @apply bg-background text-foreground;
