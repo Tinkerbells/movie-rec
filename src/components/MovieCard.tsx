@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { RecommendationType } from "./Recommendations";
 import {
   Card,
   CardDescription,
@@ -11,6 +10,7 @@ import { api } from "@/utils/api";
 import { BlurImage } from "./BlurImage";
 import { TmdbImageLoader } from "./TmdbImageLoader";
 import { formatDate, formatDescription } from "@/helpers";
+import { RecommendationType } from "@/types/recommendation";
 interface MovieCardProps {
   movie: RecommendationType;
 }
@@ -21,7 +21,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   return (
     <Card key={movie.title} className="flex w-full max-w-xl items-center">
       {isLoading ? (
-        <div className="h-32 p-2">
+        <div className="h-40 p-2">
           <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
           </div>
@@ -44,7 +44,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
               </figure>
             </a>
           ) : (
-            <div className="h-32 p-2">
+            <div className="h-40 p-2">
               <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                 <ImageIcon />
               </div>
@@ -56,11 +56,11 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         <CardTitle>
           {movie.title}
           <p className="mt-1 text-sm font-normal text-muted-foreground">
-            {data?.releaseDate && formatDate(data?.releaseDate!)}
+            {data?.releaseDate ? formatDate(data?.releaseDate!) : "??"}
           </p>
         </CardTitle>
         <CardDescription>
-          {formatDescription(movie.description)}
+          {data?.description ? formatDescription(data?.description) : "??"}
         </CardDescription>
       </CardHeader>
     </Card>
