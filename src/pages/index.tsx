@@ -13,7 +13,7 @@ const Home: NextPage = () => {
           <p className="leading-7 [&:not(:first-child)]:mt-6">
             Looking for the next movie to watch but don't know where to start?
             With this app, you can easily find the next movie to watch by
-            picking your favorite genres, or find similar movies based on your
+            picking your favorite genres or find similar movies based on your
             favorites.
           </p>
         </div>
