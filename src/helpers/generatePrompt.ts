@@ -4,7 +4,7 @@ export const generateGenrePrompt = (genres: string[], query?: string) => {
   return `Give me recommendations of ${RECOMMENDATIONS_COUNT} movies in this genres ${genres.join(
     " "
   )} all comes together ${
-    query && "and this description query - " + query.trim()
+    query && "and this description query - " + query.trim() // eslint-disable-line
   } Provide a  RFC8259 compliant JSON response following this format without deviation.
 [{
   "title": "movie title",

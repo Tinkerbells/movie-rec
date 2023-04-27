@@ -1,9 +1,5 @@
 import { type GetServerSidePropsContext } from "next";
-import {
-  getServerSession,
-  type NextAuthOptions,
-  type DefaultSession,
-} from "next-auth";
+import { getServerSession, type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { env } from "@/env.mjs";
@@ -49,7 +45,7 @@ export const authOptions: NextAuthOptions = {
      */
   ],
   callbacks: {
-    async session({ token, session }) {
+    session({ token, session }) {
       if (token) {
         session.user!.name = token.name;
         session.user!.email = token.email;
@@ -66,7 +62,7 @@ export const authOptions: NextAuthOptions = {
       });
 
       if (!dbUser) {
-        token.id = user!.id;
+        token.id = user.id;
         return token;
       }
 

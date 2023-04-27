@@ -13,10 +13,8 @@ import { Plus, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useForm } from "@/hooks";
 import { generateSimilarPrompt } from "@/helpers";
-import { useMessageStore } from "@/store/messagesStore";
-import { useRouter } from "next/router";
-import { FC } from "react";
-import { MenuProps } from "./RecommendationMenu";
+import { type FC } from "react";
+import { type MenuProps } from "./RecommendationMenu";
 
 interface SimilarityMenuFormValues {
   favorites: string[];
@@ -82,7 +80,7 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
                     <Input
                       type="text"
                       id={`favorite-${index}`}
-                      className={`${values.favorites.length > 1 && "pr-9"}`}
+                      className={`${values.favorites.length > 1 && "pr-9"}`} // eslint-disable-line
                       placeholder="Type your favorite movie..."
                       onChange={(e) => {
                         changeFavorite(e, index);

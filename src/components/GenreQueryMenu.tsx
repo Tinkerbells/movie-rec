@@ -15,11 +15,11 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/scroll-area";
 import { genres } from "@/consts";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { FC, useMemo } from "react";
+import { type FC, useMemo } from "react";
 import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
 import { generateGenrePrompt } from "@/helpers";
-import { MenuProps } from "./RecommendationMenu";
+import { type MenuProps } from "./RecommendationMenu";
 
 interface GenreQueryFormValues {
   query: string;
@@ -160,7 +160,7 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
                       className="w-full"
                       type="button"
                       {...getToggleButtonProps(
-                        getDropdownProps({ preventKeyAction: isOpen })
+                        getDropdownProps({ preventKeyAction: isOpen }) // eslint-disable-line
                       )}
                     >
                       Pick genre
@@ -174,7 +174,7 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
                 </div>
                 <ScrollArea
                   className={`mt-1 h-72 w-full rounded-md border ${
-                    !(isOpen && items.length) && "hidden"
+                    !(isOpen && items.length) && "hidden" // eslint-disable-line
                   }`}
                   {...getMenuProps()}
                 >

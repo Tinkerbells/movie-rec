@@ -18,7 +18,7 @@ const Home: NextPage = () => {
           </p>
         </div>
         <Button
-          onClick={() => signIn()}
+          onClick={() => void signIn()}
           variant={"outline"}
           className="w-full max-w-sm"
         >

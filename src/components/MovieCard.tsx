@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { type FC } from "react";
 import {
   Card,
   CardDescription,
@@ -10,7 +10,7 @@ import { api } from "@/utils/api";
 import { BlurImage } from "./BlurImage";
 import { TmdbImageLoader } from "./TmdbImageLoader";
 import { formatDate, formatDescription } from "@/helpers";
-import { RecommendationType } from "@/types/recommendation";
+import { type RecommendationType } from "@/types/recommendation";
 interface MovieCardProps {
   movie: RecommendationType;
 }
@@ -28,9 +28,9 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         </div>
       ) : (
         <>
-          {data?.posterPath ? (
+          {data?.posterPath && data.tmdbId ? (
             <a
-              className="flex cursor-pointer items-center p-2"
+              className="flex items-center p-2"
               href={`https://www.themoviedb.org/movie/${data.tmdbId}`}
             >
               <figure className="w-24">
@@ -56,7 +56,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         <CardTitle>
           {movie.title}
           <p className="mt-1 text-sm font-normal text-muted-foreground">
-            {data?.releaseDate ? formatDate(data?.releaseDate!) : "??"}
+            {data?.releaseDate ? formatDate(data?.releaseDate) : "??"}
           </p>
         </CardTitle>
         <CardDescription>

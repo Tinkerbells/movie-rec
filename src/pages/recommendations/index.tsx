@@ -2,8 +2,8 @@ import { RecommendationMenu, Recommendations } from "@/components";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
 import { generateUpdatePrompt } from "@/helpers";
-import { messageType } from "@/types/message";
-import { RecommendationType } from "@/types/recommendation";
+import { type messageType } from "@/types/message";
+import { type RecommendationType } from "@/types/recommendation";
 import { api } from "@/utils/api";
 import { useState } from "react";
 
@@ -32,7 +32,7 @@ const RecommendationsPage = () => {
               <ToastAction
                 altText="Try again"
                 onClick={() => {
-                  refetch();
+                  void refetch();
                 }}
               >
                 Try again
@@ -48,7 +48,7 @@ const RecommendationsPage = () => {
       console.log(data.assistantMessage);
       setMessages([
         ...messages,
-        data.assistantMessage!,
+        data.assistantMessage,
         { role: "user", content: generateUpdatePrompt() },
       ]);
     }

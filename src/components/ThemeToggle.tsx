@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { buttonVariants } from "@/components/ui/button";
 import { Laptop, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 

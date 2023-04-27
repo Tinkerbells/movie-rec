@@ -35,7 +35,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      async authorized() {
+      authorized() {
         return true;
       },
     },
