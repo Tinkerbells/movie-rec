@@ -67,8 +67,10 @@ const RecommendationsPage = () => {
   return (
     <div
       className={cn(
-        "relative flex h-screen justify-center overflow-x-hidden",
-        recommendations.length < 1 && messages.length <= 1 && "items-center"
+        "relative flex h-screen justify-center overflow-x-hidden pb-20",
+        recommendations.length < 1 && messages.length <= 1
+          ? "items-center"
+          : "items-start"
       )}
     >
       {recommendations.length < 1 && messages.length <= 1 ? (
