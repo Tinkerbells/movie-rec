@@ -17,7 +17,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
+        refetchIntervalInBackground: false,
+        refetchInterval: false,
       },
     },
   });
