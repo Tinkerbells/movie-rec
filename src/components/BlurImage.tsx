@@ -1,5 +1,5 @@
-import Image, { ImageLoader } from "next/image";
-import { FC, useState } from "react";
+import Image, { type ImageLoader } from "next/image";
+import { type FC, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
