@@ -1,4 +1,3 @@
-import { genres } from "@/consts";
 import Select, {
   components,
   type DropdownIndicatorProps,
@@ -80,7 +79,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
           "flex items-center justify-between py-0.5 px-2 bg-accent rounded-lg m-1",
         multiValueLabel: () => "text-sm font-medium",
         multiValueRemove: () => "w-4 h-4 ml-2",
-        input: () => "max-w-sm text-sm font-medium",
+        input: () => "max-w-sm text-sm font-medium cursor-pointer",
         clearIndicator: () => "cursor-pointer",
         dropdownIndicator: () => "cursor-pointer",
         placeholder: () => "text-sm font-medium text-muted-foreground",
