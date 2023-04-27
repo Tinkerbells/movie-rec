@@ -33,7 +33,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
               className="flex items-center p-2"
               href={`https://www.themoviedb.org/movie/${data.tmdbId}`}
             >
-              <figure className="w-24">
+              <figure className="w-20 md:w-24">
                 <BlurImage
                   src={data.posterPath}
                   alt={movie.title}
@@ -59,7 +59,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
             {data?.releaseDate ? formatDate(data?.releaseDate) : "??"}
           </p>
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="hidden md:flex">
           {data?.description ? formatDescription(data?.description) : "??"}
         </CardDescription>
       </CardHeader>

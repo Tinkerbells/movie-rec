@@ -2,7 +2,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SimilarityMenu } from "./SimilarityMenu";
 import { GenreQueryMenu } from "./GenreQueryMenu";
 import { messageType } from "@/types/message";
-import { FC } from "react";
+import { type FC } from "react";
 
 export interface MenuProps {
   setMessage: (content: string) => void;
@@ -13,7 +13,7 @@ export const RecommendationMenu: FC<MenuProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-80 flex-col gap-4 md:w-[500px]">
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         Get recommendations using this methods
       </h3>

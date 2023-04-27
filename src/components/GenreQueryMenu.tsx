@@ -10,7 +10,6 @@ import {
 import { Label } from "./ui/label";
 import { TabsContent } from "./ui/tabs";
 import { Textarea } from "./ui/textarea";
-import { ScrollArea } from "./ui/scroll-area";
 import { type FC } from "react";
 import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
@@ -58,17 +57,13 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
       <form onSubmit={handleSumbit}>
         <Card>
           <CardHeader>
-            <CardTitle>Query and genre recommendations</CardTitle>
+            <CardTitle>Genre recommendations</CardTitle>
             <CardDescription>
               Get recommendations using genres and query
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="grid w-full max-w-lg items-center gap-4">
-              <div className="w-full">
-                <div className="flex flex-col gap-2"></div>
-                <ScrollArea></ScrollArea>
-              </div>
               <div className="flex flex-col gap-3">
                 <MultiSelect
                   setOptions={(options: OptionType[]) =>

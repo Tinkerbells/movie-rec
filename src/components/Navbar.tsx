@@ -9,7 +9,7 @@ export const Navbar = () => {
   return (
     <div className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b border-accent bg-card px-5">
       <Link href="/">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-3xl">
+        <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight md:text-4xl lg:text-3xl">
           MOVIE-REC
         </h1>
       </Link>
