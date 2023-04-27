@@ -15,21 +15,20 @@ import { useForm } from "@/hooks";
 import { generateSimilarPrompt } from "@/helpers";
 import { useMessageStore } from "@/store/messagesStore";
 import { useRouter } from "next/router";
+import { FC } from "react";
+import { MenuProps } from "./RecommendationMenu";
 
 interface SimilarityMenuFormValues {
   favorites: string[];
 }
-export const SimilarityMenu = () => {
-  const router = useRouter();
-  const setMessages = useMessageStore((state) => state.setMessages);
+export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
   const { values, errors, setFieldValue, handleSumbit } =
     useForm<SimilarityMenuFormValues>({
       defaultValues: { favorites: [""] },
       onSubmit: (values) => {
         if (!!values) {
           const content = generateSimilarPrompt(values.favorites);
-          setMessages([{ role: "user", content: content }]);
-          router.push("/recommendations");
+          setMessage(content);
         }
       },
       validate: (values) => {
@@ -123,7 +122,12 @@ export const SimilarityMenu = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant={"outline"} className="w-full" type="submit">
+            <Button
+              variant={"outline"}
+              className="w-full"
+              type="submit"
+              isLoading={isLoading}
+            >
               Get recommendations
             </Button>
           </CardFooter>

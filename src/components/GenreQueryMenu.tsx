@@ -15,19 +15,17 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "./ui/scroll-area";
 import { genres } from "@/consts";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useForm } from "@/hooks";
 import { toast } from "./ui/use-toast";
 import { generateGenrePrompt } from "@/helpers";
-import { useMessageStore } from "@/store/messagesStore";
-import { useRouter } from "next/router";
+import { MenuProps } from "./RecommendationMenu";
+
 interface GenreQueryFormValues {
   query: string;
   selectedGenres: string[];
 }
-export const GenreQueryMenu = () => {
-  const router = useRouter();
-  const setMessages = useMessageStore((state) => state.setMessages);
+export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
   const { values, setFieldValue, handleSumbit } = useForm<GenreQueryFormValues>(
     {
       defaultValues: { query: "", selectedGenres: [] },
@@ -37,8 +35,7 @@ export const GenreQueryMenu = () => {
             values.selectedGenres,
             values.query
           );
-          setMessages([{ role: "user", content: content }]);
-          router.push("/recommendations");
+          setMessage(content);
         }
       },
       validate: (values) => {
@@ -151,7 +148,7 @@ export const GenreQueryMenu = () => {
                             }}
                           >
                             <X
-                              className="max-h-4 font-bold group-hover:text-primary-foreground"
+                              className="max-h-4 font-bold group-hover:text-muted-foreground"
                               strokeWidth={2}
                             />
                           </span>
@@ -213,7 +210,12 @@ export const GenreQueryMenu = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant={"outline"} className="w-full" type="submit">
+            <Button
+              variant={"outline"}
+              className="w-full"
+              type="submit"
+              isLoading={isLoading}
+            >
               Get recommendations
             </Button>
           </CardFooter>
