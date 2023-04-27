@@ -92,7 +92,7 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
                         className="group -ml-7"
                         onClick={() => removeFavorite(index)}
                       >
-                        <XCircle className="h-5 w-5 text-accent group-hover:text-primary" />
+                        <XCircle className="h-5 w-5 text-primary group-hover:text-muted-foreground" />
                       </button>
                     ) : null}
                   </div>

@@ -13,11 +13,11 @@ export const RecommendationMenu: FC<MenuProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="flex w-80 flex-col gap-4 md:w-[500px]">
+    <div className="flex w-80 flex-col gap-4 md:w-[450px]">
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         Get recommendations using this methods
       </h3>
-      <Tabs defaultValue="genres" className="max-w-[500px]">
+      <Tabs defaultValue="genres" className="max-w-[450px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="genres">By genres and query</TabsTrigger>
           <TabsTrigger value="similar">By similarity</TabsTrigger>
