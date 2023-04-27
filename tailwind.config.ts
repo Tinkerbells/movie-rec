@@ -1,7 +1,4 @@
-import { type Config } from "tailwindcss";
-const { fontFamily } = require("tailwindcss/defaultTheme");
-
-export default {
+module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -54,14 +51,16 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["Inter", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
+          from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
         },
       },
       animation: {
@@ -71,4 +70,4 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config;
+};

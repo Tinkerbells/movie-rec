@@ -10,7 +10,7 @@ export const Navbar = () => {
       <h1 className="hidden scroll-m-20 text-2xl font-extrabold tracking-tight md:flex md:text-4xl lg:text-3xl">
         MOVIE-REC
       </h1>
-      <div className="flex items-center justify-between gap-8">
+      <div className="flex w-full items-center justify-between gap-8 md:w-fit">
         <div>
           {!session?.user ? (
             // Handle unauthenticated state, e.g. render a SignIn/SignOut component
