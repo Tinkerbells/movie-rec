@@ -1,46 +1,41 @@
 import { FC } from "react";
 import { MovieCard } from "./MovieCard";
-import { messageType } from "@/types/message";
 import { Button } from "./ui/button";
-import { useMessageStore } from "@/store/messagesStore";
-import { RotateCw } from "lucide-react";
-import { UPDATE_PROMPT } from "@/consts";
-export type RecommendationType = {
-  title: string;
-  description: string;
-};
+import { ChevronLeft, RotateCw } from "lucide-react";
+import { RecommendationType } from "@/types/recommendation";
+
 interface RecommendationsProps {
-  refetch: () => void;
   recommendations: RecommendationType[];
-  assistantMessage: messageType;
+  getBack: () => void;
+  handleUpdate: () => void;
+  isLoading: boolean;
 }
 export const Recommendations: FC<RecommendationsProps> = ({
-  refetch,
   recommendations,
-  assistantMessage,
+  getBack,
+  handleUpdate,
+  isLoading,
 }) => {
-  const { messages, setMessages } = useMessageStore((state) => ({
-    messages: state.messages,
-    setMessages: state.setMessages,
-  }));
-  const handleClick = () => {
-    const temp = messages;
-    temp.push(assistantMessage, { role: "user", content: UPDATE_PROMPT });
-    setMessages(temp);
-    refetch();
-  };
-
   return (
-    <div>
+    <div className="mb-10 mt-52 flex flex-col items-center gap-4">
+      <Button onClick={getBack} className="w-fit" variant={"ghost"}>
+        <ChevronLeft className="mr-2 h-4 w-4" />
+        Back to form
+      </Button>
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         Recommendations
       </h3>
-      <div className="mt-4 flex flex-col gap-2.5 rounded-lg border p-4">
+      <div className="flex flex-col gap-2.5 rounded-lg border p-4">
         {recommendations.slice(0, 5).map((movie) => (
           <MovieCard key={movie.title} movie={movie} />
         ))}
-        <Button type="button" onClick={handleClick} variant={"outline"}>
-          <RotateCw className="mr-2 h-4 w-4" />
+        <Button
+          type="button"
+          onClick={handleUpdate}
+          variant={"outline"}
+          isLoading={isLoading}
+        >
+          {isLoading ? null : <RotateCw className="mr-2 h-4 w-4" />}
           Update
         </Button>
       </div>
