@@ -6,7 +6,7 @@ import { type messageType } from "@/types/message";
 import { type RecommendationType } from "@/types/recommendation";
 import { api } from "@/utils/api";
 import { useState } from "react";
-
+import { cn } from "@/lib/utils";
 const RecommendationsPage = () => {
   const [messages, setMessages] = useState<messageType[]>([]);
   const [recommendations, setRecommendations] = useState<RecommendationType[]>(
@@ -65,7 +65,12 @@ const RecommendationsPage = () => {
   };
 
   return (
-    <div className="relative flex h-screen items-center justify-center overflow-x-hidden">
+    <div
+      className={cn(
+        "relative flex h-screen justify-center overflow-x-hidden",
+        recommendations.length < 1 && messages.length <= 1 && "items-center"
+      )}
+    >
       {recommendations.length < 1 && messages.length <= 1 ? (
         <RecommendationMenu setMessage={setMessage} isLoading={isFetching} />
       ) : (
