@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { type FC } from "react";
 import { MovieCard } from "./MovieCard";
 import { Button } from "./ui/button";
 import { ChevronLeft, RotateCw } from "lucide-react";
-import { RecommendationType } from "@/types/recommendation";
+import { type RecommendationType } from "@/types/recommendation";
 
 interface RecommendationsProps {
   recommendations: RecommendationType[];
