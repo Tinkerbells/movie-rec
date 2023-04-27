@@ -24,5 +24,3 @@ export const genres = [
 ];
 
 export const RECOMMENDATIONS_COUNT = 5;
-
-export const UPDATE_PROMPT = `Give me another ${RECOMMENDATIONS_COUNT}`;

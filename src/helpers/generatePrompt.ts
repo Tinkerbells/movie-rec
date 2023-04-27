@@ -8,7 +8,6 @@ export const generateGenrePrompt = (genres: string[], query?: string) => {
   } Provide a  RFC8259 compliant JSON response following this format without deviation.
 [{
   "title": "movie title",
-  "description": "movie description about 25 words",
 }]
 The JSON response:`;
 };
@@ -19,7 +18,16 @@ export const generateSimilarPrompt = (favorites: string[]) => {
   )} Provide a  RFC8259 compliant JSON response following this format without deviation.
 [{
   "title": "movie title",
-  "description": "movie description about 25 words",
 }]
 The JSON response:`;
+};
+
+export const generateUpdatePrompt = () => {
+  return `Give me another ${RECOMMENDATIONS_COUNT} 
+Provide a  RFC8259 compliant JSON response following this format without deviation.
+[{
+  "title": "movie title",
+}]
+The JSON response:
+`;
 };
