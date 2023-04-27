@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { openai } from "@/lib/opeanai";
-import { generateGenrePrompt, generateSimilarPrompt } from "@/helpers";
+import { RecommendationType } from "@/types/recommendation";
 
 export const recommendationRouter = createTRPCRouter({
   getRecommendations: protectedProcedure
@@ -17,10 +17,12 @@ export const recommendationRouter = createTRPCRouter({
         // @ts-ignore
         messages: input.messages,
       });
-      const res = JSON.parse(completion.data.choices[0]?.message?.content!);
+      const recommendations: RecommendationType[] = JSON.parse(
+        completion.data.choices[0]?.message?.content!
+      );
       return {
         assistantMessage: completion.data.choices[0]?.message,
-        recommendations: res,
+        recommendations: recommendations,
       };
     }),
 });
