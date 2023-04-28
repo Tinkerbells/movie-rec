@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface BlurImageProps {
   src: string;
   alt: string;
-  loader: ImageLoader;
+  loader?: ImageLoader;
   width?: number;
   height?: number;
 }

@@ -1,5 +1,5 @@
 import { tmdbApi } from "@/api";
-import { TmdbResponse } from "@/types/tmdb";
+import { type TmdbResponse } from "@/types/tmdb";
 
 const api = tmdbApi();
 

@@ -24,6 +24,7 @@ const server = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   TMDB_API_KEY: z.string(),
+  OMDB_API_KEY: z.string(),
 });
 
 /**
@@ -51,6 +52,7 @@ const processEnv = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   TMDB_API_KEY: process.env.TMDB_API_KEY,
+  OMDB_API_KEY: process.env.OMDB_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

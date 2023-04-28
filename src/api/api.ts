@@ -9,3 +9,12 @@ export const tmdbApi = () => {
     },
   });
 };
+
+export const omdbApi = () => {
+  return axios.create({
+    baseURL: "http://www.omdbapi.com",
+    params: {
+      apikey: env.OMDB_API_KEY,
+    },
+  });
+};
