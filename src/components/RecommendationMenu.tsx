@@ -12,7 +12,7 @@ export const RecommendationMenu: FC<MenuProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="mt-10 flex w-80 flex-col gap-4 md:w-[450px]">
+    <div className="mt-14 flex w-80 flex-col gap-4 md:w-[450px]">
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         Get recommendations using this methods
       </h3>
