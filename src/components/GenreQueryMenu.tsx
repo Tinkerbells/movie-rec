@@ -17,6 +17,7 @@ import { generateGenrePrompt } from "@/helpers";
 import { type MenuProps } from "./RecommendationMenu";
 import { genres } from "@/consts";
 import { MultiSelect } from "./MultiSelect";
+import { Toggle } from "./ui/toggle";
 
 export type OptionType = {
   label: string;
@@ -25,33 +26,41 @@ export type OptionType = {
 interface GenreQueryFormValues {
   query: string;
   selectedGenres: OptionType[];
+  isMovies: boolean;
 }
 export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
-  const { setFieldValue, handleSumbit } = useForm<GenreQueryFormValues>({
-    defaultValues: { query: "", selectedGenres: [] },
-    onSubmit: (values) => {
-      if (!!values) {
-        const content = generateGenrePrompt(
-          values.selectedGenres.map((value) => value.value),
-          values.query
-        );
-        setMessage(content);
-      }
-    },
-    validate: (values) => {
-      if (values.selectedGenres.length === 0) {
-        toast({
-          variant: "destructive",
-          title: "Genres are required!",
-          description:
-            "Please provide at least one favorite genre to get recommendations",
-        });
-        return { selectedGenres: "Genres are required" };
-      }
-      return;
-    },
-  });
-
+  const { setFieldValue, handleSumbit, values } = useForm<GenreQueryFormValues>(
+    {
+      defaultValues: {
+        query: "",
+        selectedGenres: [],
+        isMovies: true,
+      },
+      onSubmit: (values) => {
+        if (!!values) {
+          const content = generateGenrePrompt(
+            values.selectedGenres.map((value) => value.value),
+            values.isMovies,
+            values.query
+          );
+          // setMessage(content);
+        }
+      },
+      validate: (values) => {
+        if (values.selectedGenres.length === 0 && values.query.length === 0) {
+          toast({
+            variant: "destructive",
+            title: "Genres or query are required!",
+            description:
+              "Please provide at least one favorite genre or wirte query to get recommendations",
+          });
+          return { selectedGenres: "Genres or query are required" };
+        }
+        return;
+      },
+    }
+  );
+  console.log(values.isMovies);
   return (
     <TabsContent value="genres">
       <form onSubmit={handleSumbit}>
@@ -63,6 +72,34 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
+            <div className="flex flex-col gap-4">
+              <Label htmlFor="search-type" className="flex items-center">
+                Search for (choose one)
+              </Label>
+              <div className="flex justify-between gap-4">
+                <Toggle
+                  pressed={values.isMovies}
+                  defaultPressed
+                  onPressedChange={(pressed) =>
+                    setFieldValue("isMovies", pressed)
+                  }
+                  className="w-full"
+                >
+                  Movies
+                  <p className="sr-only">Movies</p>
+                </Toggle>
+                <Toggle
+                  pressed={!values.isMovies}
+                  className="w-full"
+                  onPressedChange={(pressed) =>
+                    setFieldValue("isMovies", !pressed)
+                  }
+                >
+                  Series
+                  <p className="sr-only">Series</p>
+                </Toggle>
+              </div>
+            </div>
             <div className="grid w-full max-w-lg items-center gap-4">
               <div className="flex flex-col gap-3">
                 <MultiSelect

@@ -17,7 +17,7 @@ export const Recommendations: FC<RecommendationsProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="mt-24 flex w-80 flex-col items-center gap-4 md:mt-52 md:w-[700px]">
+    <div className="mt-24 flex w-80 flex-col items-center gap-4 md:w-[700px]">
       <Button onClick={getBack} className="w-fit" variant={"ghost"}>
         <ChevronLeft className="mr-2 h-4 w-4" />
         Back to form

@@ -15,17 +15,22 @@ import { useForm } from "@/hooks";
 import { generateSimilarPrompt } from "@/helpers";
 import { type FC } from "react";
 import { type MenuProps } from "./RecommendationMenu";
+import { Toggle } from "./ui/toggle";
 
 interface SimilarityMenuFormValues {
   favorites: string[];
+  isMovies: boolean;
 }
 export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
   const { values, errors, setFieldValue, handleSumbit } =
     useForm<SimilarityMenuFormValues>({
-      defaultValues: { favorites: [""] },
+      defaultValues: { favorites: [""], isMovies: true },
       onSubmit: (values) => {
         if (!!values) {
-          const content = generateSimilarPrompt(values.favorites);
+          const content = generateSimilarPrompt(
+            values.favorites,
+            values.isMovies
+          );
           setMessage(content);
         }
       },
@@ -67,7 +72,35 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col items-center gap-4 rounded-lg border border-accent p-4">
+            <div className="flex flex-col gap-4">
+              <Label htmlFor="search-type" className="flex items-center">
+                Search for (choose one)
+              </Label>
+              <div className="flex justify-between gap-4">
+                <Toggle
+                  pressed={values.isMovies}
+                  defaultPressed
+                  onPressedChange={(pressed) =>
+                    setFieldValue("isMovies", pressed)
+                  }
+                  className="w-full"
+                >
+                  Movies
+                  <p className="sr-only">Movies</p>
+                </Toggle>
+                <Toggle
+                  pressed={!values.isMovies}
+                  className="w-full"
+                  onPressedChange={(pressed) =>
+                    setFieldValue("isMovies", !pressed)
+                  }
+                >
+                  Series
+                  <p className="sr-only">Series</p>
+                </Toggle>
+              </div>
+            </div>
+            <div className="mt-2 flex flex-col items-center gap-4 rounded-lg border border-accent p-4">
               {values.favorites.map((el, index) => (
                 <div
                   className="grid w-full max-w-xs items-center gap-1.5"

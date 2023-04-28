@@ -52,6 +52,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
 
   return (
     <Select
+      instanceId="custom-multi-select"
       onChange={(options) => setOptions(options as OptionType[])}
       onMenuOpen={() => setIsOpen(true)}
       onMenuClose={() => setIsOpen(false)}
@@ -72,8 +73,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
             isFocused && "ring-ring ring-2 ring-offset-2",
             "rounded-lg border px-3 py-2"
           ),
+        menuPortal: () =>
+          "scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100",
         menu: () =>
-          "border mt-2 bg-card rounded-lg pl-2 py-2 cursor-pointer pr-0.5",
+          "border mt-2 bg-card rounded-lg pl-2 py-2 cursor-pointer pr-0.5 styled-scrollbars",
         indicatorSeparator: () => "bg-red",
         multiValue: () =>
           "flex items-center justify-between py-0.5 px-2 bg-accent rounded-lg m-1",
