@@ -10,8 +10,7 @@ export const generateGenrePrompt = (
   } ${
     genres.length > 0 && // eslint-disable-line
     "in thies genres" + genres.join(" ") + "all come together"
-  } 
-    query && "and this description query - " + query.trim() // eslint-disable-line
+  } ${query && "and this description query - " + query.trim()} 
   } Provide a  RFC8259 compliant JSON response following this format without deviation.
 [{
   "title": "movie title",

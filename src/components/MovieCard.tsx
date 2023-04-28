@@ -8,8 +8,7 @@ import {
 import { Image as ImageIcon, Loader2 } from "lucide-react";
 import { api } from "@/utils/api";
 import { BlurImage } from "./BlurImage";
-import { TmdbImageLoader } from "./TmdbImageLoader";
-import { formatDate, formatDescription } from "@/helpers";
+import { formatDescription } from "@/helpers";
 import { type RecommendationType } from "@/types/recommendation";
 interface MovieCardProps {
   movie: RecommendationType;
@@ -48,8 +47,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
               </figure>
             </a>
           ) : (
-            <div className="h-32 w-32 p-2 md:h-40 md:w-28">
-              <div className="flex h-full w-full items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+            <div className="max-w-32 h-32 p-2 md:h-40 md:w-28">
+              <div className="flex h-full w-20 items-center justify-center rounded-lg bg-secondary text-secondary-foreground md:w-24">
                 <ImageIcon />
               </div>
             </div>
@@ -61,7 +60,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
           {movie.title}
           <p className="mt-1 text-sm font-normal text-muted-foreground">
             {/* {data?.releaseDate ? formatDate(data?.releaseDate) : "??"} */}
-            {data?.releaseDate}
+            {data?.releaseDate ? data.releaseDate : "??"}
           </p>
         </CardTitle>
         <CardDescription className="hidden md:flex">
