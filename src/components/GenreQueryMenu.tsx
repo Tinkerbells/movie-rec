@@ -43,7 +43,7 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
             values.isMovies,
             values.query
           );
-          // setMessage(content);
+          setMessage(content);
         }
       },
       validate: (values) => {

@@ -24,8 +24,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   return (
     <Card key={movie.title} className="flex w-full max-w-xl items-center">
       {isLoading ? (
-        <div className="h-32 w-20 p-2 md:h-40 md:w-24">
-          <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+        <div className="h-32 w-32 p-2 md:h-40 md:w-28">
+          <div className="flex h-full w-full items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
           </div>
         </div>
@@ -48,8 +48,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
               </figure>
             </a>
           ) : (
-            <div className="h-32 w-20 p-2 md:h-40 md:w-24">
-              <div className="flex h-full w-24 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+            <div className="h-32 w-32 p-2 md:h-40 md:w-28">
+              <div className="flex h-full w-full items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                 <ImageIcon />
               </div>
             </div>
