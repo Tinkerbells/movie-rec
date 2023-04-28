@@ -37,7 +37,7 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
       validate: (values) => {
         const isEmpty = values.favorites.some((el) => el.length === 0);
         if (isEmpty) {
-          return { favorites: "No favorite movies are provided!" };
+          return { favorites: "No favorite are provided!" };
         }
         return;
       },
@@ -68,7 +68,7 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
           <CardHeader>
             <CardTitle>Similarity recommendations</CardTitle>
             <CardDescription>
-              Get a recommendations by typing your favorite movie titles
+              Get a recommendations by typing your favorites titles
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -114,7 +114,9 @@ export const SimilarityMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
                       type="text"
                       id={`favorite-${index}`}
                       className={`${values.favorites.length > 1 && "pr-9"}`} // eslint-disable-line
-                      placeholder="Type your favorite movie..."
+                      placeholder={`Type your favorite ${
+                        values.isMovies ? "movies" : "series"
+                      }...`}
                       onChange={(e) => {
                         changeFavorite(e, index);
                       }}

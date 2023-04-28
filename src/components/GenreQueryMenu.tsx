@@ -68,7 +68,7 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
           <CardHeader>
             <CardTitle>Genre recommendations</CardTitle>
             <CardDescription>
-              Get recommendations using genres and query
+              Get recommendations using genres or query
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
