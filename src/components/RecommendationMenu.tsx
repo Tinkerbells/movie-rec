@@ -16,13 +16,13 @@ export const RecommendationMenu: FC<MenuProps> = ({
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         Get recommendations using this methods
       </h3>
-      <Tabs defaultValue="genres" className="max-w-[450px]">
+      <Tabs defaultValue="similar" className="max-w-[450px]">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="genres">By genres and query</TabsTrigger>
           <TabsTrigger value="similar">By similarity</TabsTrigger>
+          <TabsTrigger value="genres">By genres and query</TabsTrigger>
         </TabsList>
-        <GenreQueryMenu setMessage={setMessage} isLoading={isLoading} />
         <SimilarityMenu setMessage={setMessage} isLoading={isLoading} />
+        <GenreQueryMenu setMessage={setMessage} isLoading={isLoading} />
       </Tabs>
     </div>
   );
