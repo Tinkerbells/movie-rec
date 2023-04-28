@@ -24,7 +24,6 @@ const RecommendationsPage = () => {
         enabled: messages.length >= 1,
         retry: false,
         onError: (error) => {
-          getBack();
           toast({
             variant: "destructive",
             title: "Something went wrong!",
