@@ -23,8 +23,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   return (
     <Card key={movie.title} className="flex w-full max-w-xl items-center">
       {isLoading ? (
-        <div className="h-32 w-32 p-2 md:h-40 md:w-28">
-          <div className="flex h-full w-full items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+        <div className="max-w-32 h-32 p-2 md:h-40 md:w-28">
+          <div className="flex h-full w-20 items-center justify-center rounded-lg bg-secondary text-secondary-foreground md:w-24">
             <Loader2 className="h-4 w-4 animate-spin" />
           </div>
         </div>
