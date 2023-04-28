@@ -3,11 +3,14 @@ import { RECOMMENDATIONS_COUNT } from "@/consts";
 export const generateGenrePrompt = (
   genres: string[],
   isMovies: boolean,
-  query?: string
+  query: string
 ) => {
   return `Give me recommendations of ${RECOMMENDATIONS_COUNT} ${
     isMovies ? "movies" : "series"
-  } in this genres ${genres.join(" ")} all comes together ${
+  } ${
+    genres.length > 0 && // eslint-disable-line
+    "in thies genres" + genres.join(" ") + "all come together"
+  } 
     query && "and this description query - " + query.trim() // eslint-disable-line
   } Provide a  RFC8259 compliant JSON response following this format without deviation.
 [{
