@@ -8,7 +8,7 @@ import Select, {
 } from "react-select";
 import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { type FC, useState } from "react";
+import { type FC, useState, useRef } from "react";
 import { type OptionType } from "./GenreQueryMenu";
 
 interface MultiSelectProps {
@@ -17,7 +17,7 @@ interface MultiSelectProps {
 }
 export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const windowWidth = useRef(window.innerWidth);
   const DropdownIndicator = (props: DropdownIndicatorProps<OptionType>) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -60,6 +60,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
       closeMenuOnSelect={false}
       options={options}
       isMulti
+      isSearchable={innerWidth < 768 ? false : true}
       unstyled
       components={{
         DropdownIndicator,
