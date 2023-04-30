@@ -75,8 +75,6 @@ export const MultiSelect: FC<MultiSelectProps> = ({ options, setOptions }) => {
             isFocused && "ring-ring ring-2 ring-offset-2",
             "rounded-lg border px-3 py-2"
           ),
-        menuPortal: () =>
-          "scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100",
         menu: () =>
           "border mt-2 bg-card rounded-lg pl-2 py-2 cursor-pointer pr-0.5 styled-scrollbars",
         indicatorSeparator: () => "bg-red",
