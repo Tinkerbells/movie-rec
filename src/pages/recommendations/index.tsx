@@ -1,3 +1,4 @@
+"use client";
 import { RecommendationMenu, Recommendations } from "@/components";
 import { generateUpdatePrompt } from "@/helpers";
 import { type messageType } from "@/types/message";

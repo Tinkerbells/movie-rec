@@ -1,3 +1,4 @@
+"use client";
 import { type FC } from "react";
 import { MovieCard } from "./MovieCard";
 import { Button } from "./ui/button";
