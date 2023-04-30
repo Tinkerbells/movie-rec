@@ -64,7 +64,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
           </p>
         </CardTitle>
         <CardDescription className="hidden md:flex">
-          {data?.description ? formatDescription(data?.description) : "??"}
+          {/* {data?.description ? formatDescription(data?.description) : "??"} */}
+          {data?.description}
         </CardDescription>
       </CardHeader>
     </Card>
