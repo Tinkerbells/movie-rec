@@ -36,7 +36,6 @@ const RecommendationsPage = () => {
 
   const handleUpdate = () => {
     if (data?.assistantMessage) {
-      console.log(data.assistantMessage);
       setMessages([
         ...messages,
         data.assistantMessage,

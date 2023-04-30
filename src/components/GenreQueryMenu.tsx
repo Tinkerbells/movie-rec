@@ -60,7 +60,6 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
       },
     }
   );
-  console.log(values.isMovies);
   return (
     <TabsContent value="genres">
       <form onSubmit={handleSumbit}>
