@@ -6,6 +6,7 @@ import { api } from "@/utils/api";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
+import Head from "next/head";
 const RecommendationsPage = () => {
   const [messages, setMessages] = useState<messageType[]>([]);
   const [recommendations, setRecommendations] = useState<RecommendationType[]>(
@@ -53,25 +54,30 @@ const RecommendationsPage = () => {
   };
 
   return (
-    <div
-      className={cn(
-        "relative flex h-screen justify-center overflow-x-hidden pb-20",
-        recommendations.length < 1 && messages.length <= 1
-          ? "items-center"
-          : "items-start"
-      )}
-    >
-      {recommendations.length < 1 && messages.length <= 1 ? (
-        <RecommendationMenu setMessage={setMessage} isLoading={isFetching} />
-      ) : (
-        <Recommendations
-          handleUpdate={handleUpdate}
-          recommendations={recommendations}
-          getBack={getBack}
-          isLoading={isFetching}
-        />
-      )}
-    </div>
+    <>
+      <Head>
+        <title>Recommendations</title>
+      </Head>
+      <div
+        className={cn(
+          "relative flex h-screen justify-center overflow-x-hidden pb-20",
+          recommendations.length < 1 && messages.length <= 1
+            ? "items-center"
+            : "items-start"
+        )}
+      >
+        {recommendations.length < 1 && messages.length <= 1 ? (
+          <RecommendationMenu setMessage={setMessage} isLoading={isFetching} />
+        ) : (
+          <Recommendations
+            handleUpdate={handleUpdate}
+            recommendations={recommendations}
+            getBack={getBack}
+            isLoading={isFetching}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
