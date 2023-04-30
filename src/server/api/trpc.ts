@@ -22,6 +22,7 @@ import { prisma } from "@/server/db";
 
 type CreateContextOptions = {
   session: Session | null;
+  ip: string;
 };
 
 /**
@@ -37,6 +38,7 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
+    ip: opts.ip,
     prisma,
   };
 };
@@ -52,8 +54,9 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 
   // Get the session from the server using the getServerSession wrapper function
   const session = await getServerAuthSession({ req, res });
-
+  const ip = req.connection.remoteAddress || "127.0.0.1";
   return createInnerTRPCContext({
+    ip: ip,
     session,
   });
 };
@@ -68,6 +71,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { rateLimiter } from "../ratelimiter";
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -119,6 +123,14 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   });
 });
 
+const enforceLimit = t.middleware(async ({ ctx, next }) => {
+  const { success } = await rateLimiter.limit(ctx.ip);
+  if (!success) {
+    throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+  }
+  return next({ ctx });
+});
+
 /**
  * Protected (authenticated) procedure
  *
@@ -128,3 +140,7 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+
+export const protectedAndLimitedProcedure = t.procedure
+  .use(enforceUserIsAuthed)
+  .use(enforceLimit);

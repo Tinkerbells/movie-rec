@@ -1,11 +1,15 @@
 import { z } from "zod";
 
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedAndLimitedProcedure,
+} from "@/server/api/trpc";
 import { openai } from "@/lib/opeanai";
 import type { RecommendationType } from "@/types/recommendation";
+import { type ChatCompletionRequestMessage } from "openai";
 
 export const recommendationRouter = createTRPCRouter({
-  getRecommendations: protectedProcedure
+  getRecommendations: protectedAndLimitedProcedure
     .input(
       z.object({
         messages: z.object({ role: z.string(), content: z.string() }).array(),
@@ -14,8 +18,8 @@ export const recommendationRouter = createTRPCRouter({
     .query(async ({ input }) => {
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
-        // @ts-ignore
-        messages: input.messages,
+        messages: input.messages as ChatCompletionRequestMessage[],
+        temperature: 0.8,
       });
 
       const recommendations = JSON.parse(

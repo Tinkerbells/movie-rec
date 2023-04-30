@@ -13,22 +13,21 @@ export default withAuth(
 
     const sensitiveRoutes = ["/recommendations"];
 
-    if (!isAuth) {
-      if (!pathname.startsWith("/"))
-        return NextResponse.redirect(new URL("/", req.url));
+    const isSensitive = sensitiveRoutes.some((route) =>
+      pathname.startsWith(route)
+    );
+
+    if (!isAuth && !pathname.startsWith("/")) {
+      return NextResponse.redirect(new URL("/", req.url));
     }
 
-    if (
-      !isAuth &&
-      sensitiveRoutes.some((route) => pathname.startsWith(route))
-    ) {
+    if (!isAuth && isSensitive) {
       return NextResponse.redirect(new URL("/", req.url));
     }
 
     if (isAuthPage) {
-      if (isAuth) {
-        if (!pathname.startsWith("/recommendations"))
-          return NextResponse.redirect(new URL("/recommendations", req.url));
+      if (isAuth && !pathname.startsWith("/recommendations")) {
+        return NextResponse.redirect(new URL("/recommendations", req.url));
       }
       return null;
     }

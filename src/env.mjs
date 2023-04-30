@@ -25,6 +25,8 @@ const server = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   TMDB_API_KEY: z.string(),
   OMDB_API_KEY: z.string(),
+  UPSTASH_REDIS_REST_URL: z.string().url(),
+  UPSTASH_REDIS_REST_TOKEN: z.string(),
 });
 
 /**
@@ -53,6 +55,8 @@ const processEnv = {
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   TMDB_API_KEY: process.env.TMDB_API_KEY,
   OMDB_API_KEY: process.env.OMDB_API_KEY,
+  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

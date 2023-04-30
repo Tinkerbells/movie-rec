@@ -1,47 +1,36 @@
 import { RecommendationMenu, Recommendations } from "@/components";
-import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
 import { generateUpdatePrompt } from "@/helpers";
 import { type messageType } from "@/types/message";
 import { type RecommendationType } from "@/types/recommendation";
 import { api } from "@/utils/api";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { toast } from "react-hot-toast";
 const RecommendationsPage = () => {
   const [messages, setMessages] = useState<messageType[]>([]);
   const [recommendations, setRecommendations] = useState<RecommendationType[]>(
     []
   );
-  const { data, isFetching, refetch } =
-    api.recommendation.getRecommendations.useQuery(
-      {
-        messages: messages,
+  const { data, isFetching } = api.recommendation.getRecommendations.useQuery(
+    {
+      messages: messages,
+    },
+    {
+      onSuccess: (data) => {
+        setRecommendations(data.recommendations);
       },
-      {
-        onSuccess: (data) => {
-          setRecommendations(data.recommendations);
-        },
-        enabled: messages.length >= 1,
-        retry: false,
-        onError: (error) => {
-          toast({
-            variant: "destructive",
-            title: "Something went wrong!",
-            description: error.message,
-            action: (
-              <ToastAction
-                altText="Try again"
-                onClick={() => {
-                  void refetch();
-                }}
-              >
-                Try again
-              </ToastAction>
-            ),
-          });
-        },
-      }
-    );
+      enabled: messages.length >= 1,
+      retry: false,
+      onError: (error) => {
+        console.log(error);
+        if (error.data?.code === "TOO_MANY_REQUESTS") {
+          toast.error("Too many request! Please try again later");
+        } else {
+          toast.error("Something went wrong! Please try again");
+        }
+      },
+    }
+  );
 
   const handleUpdate = () => {
     if (data?.assistantMessage) {

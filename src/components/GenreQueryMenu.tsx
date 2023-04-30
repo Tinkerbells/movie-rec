@@ -12,12 +12,13 @@ import { TabsContent } from "./ui/tabs";
 import { Textarea } from "./ui/textarea";
 import { type FC } from "react";
 import { useForm } from "@/hooks";
-import { toast } from "./ui/use-toast";
 import { generateGenrePrompt } from "@/helpers";
 import { type MenuProps } from "./RecommendationMenu";
 import { genres } from "@/consts";
 import { MultiSelect } from "./MultiSelect";
 import { Toggle } from "./ui/toggle";
+import { toast } from "react-hot-toast";
+import { AlertCircle } from "lucide-react";
 
 export type OptionType = {
   label: string;
@@ -48,11 +49,9 @@ export const GenreQueryMenu: FC<MenuProps> = ({ setMessage, isLoading }) => {
       },
       validate: (values) => {
         if (values.selectedGenres.length === 0 && values.query.length === 0) {
-          toast({
-            variant: "destructive",
-            title: "Genres or query are required!",
-            description:
-              "Please provide at least one favorite genre or wirte query to get recommendations",
+          toast("Genres or query are required!", {
+            icon: <AlertCircle />,
+            duration: 1000,
           });
           return { selectedGenres: "Genres or query are required" };
         }
