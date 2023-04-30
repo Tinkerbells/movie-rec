@@ -24,6 +24,7 @@ const RecommendationsPage = () => {
       enabled: messages.length >= 1,
       retry: false,
       onError: (error) => {
+        setMessages([]);
         console.log(error);
         if (error.data?.code === "TOO_MANY_REQUESTS") {
           toast.error("Too many request! Please try again later");
@@ -36,9 +37,9 @@ const RecommendationsPage = () => {
 
   const handleUpdate = () => {
     if (data?.assistantMessage) {
-      setMessages([
-        ...messages,
-        data.assistantMessage,
+      setMessages((prev) => [
+        ...prev,
+        data.assistantMessage!,
         { role: "user", content: generateUpdatePrompt() },
       ]);
     }
