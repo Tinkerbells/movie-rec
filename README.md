@@ -12,6 +12,7 @@ Looking for the next movie or series to watch but don't know where to start? Wit
 ## Tech
 
 - Using [create T3 app](https://create.t3.gg/)
+- UI build using [shadcn/ui](https://ui.shadcn.com/examples/dashboard)
 - [Opeanai API](https://github.com/openai/openai-node) as main main api for fetching movie or series title in json format
 - Rate limit using radis db [upstash](https://upstash.com/)
 - Image and info fetching using [omdb API](https://omdbapi.com/) or [tmdb API](https://developers.themoviedb.org/3/getting-started)
